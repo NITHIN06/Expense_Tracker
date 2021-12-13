@@ -3,9 +3,14 @@ import './expensesItems.css'
 import ExpenseDate from './expenseDate';
 import {useState} from 'react';
 function ExpensItems(props){
+    const q=0;
     const [title, setTitle] = useState(props.title);
     const titleUpdate = () =>{
         setTitle("Updated");
+    }
+    if(q===1)
+    {
+        titleUpdate();
     }
     return(
         <Card className="expense_detail">
