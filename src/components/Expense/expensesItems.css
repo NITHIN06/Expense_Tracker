@@ -50,7 +50,9 @@
     border: 1px solid white;
     border-radius: 10px
 }
-
+li{
+    margin-left: 0;
+}
 @media (min-width: 580px) {
     .expense_dt {
       flex-direction: row;

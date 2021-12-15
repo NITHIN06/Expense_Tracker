@@ -4,7 +4,7 @@ const ExpenseForm = (props) => {
     const [newTitle, setNewTitle] = useState('');
     const [newDate, setNewDate] = useState('');
     const [newAmount, setNewAmount] = useState('');
-    const [newDescription, setNewDescription] = useState('');
+    // const [newDescription, setNewDescription] = useState('');
     // const [newInput, setNewInput] = useState({newTitle: '', newDescription: '', newDate: '', newAmount: ''});
     const updateTitle = (event) => {
         setNewTitle(event.target.value)
@@ -33,7 +33,7 @@ const ExpenseForm = (props) => {
         // })
     }
     const updateAmount = (event) => {
-        setNewAmount(event.target.value)
+        setNewAmount(event.target.value);
         // setNewInput(
         //     {...newInput,
         //     newAmount: event.target.value}
@@ -45,8 +45,8 @@ const ExpenseForm = (props) => {
         //     );
         // })
     }
-    const updateDesp = (event) => {
-        setNewDescription(event.target.value)
+    // const updateDesp = (event) => {
+    //     setNewDescription(event.target.value)
         // setNewInput(
         //     {...newInput,
         //     newDescription: event.target.value}
@@ -57,22 +57,21 @@ const ExpenseForm = (props) => {
         //         newDescription: event.target.value}
         //     );
         // })
-    }
+    // }
 
     const newExpense = (event) =>{
         event.preventDefault();
         const expense = {
             title: newTitle,
-            amount: newAmount,
+            amount: +newAmount,
             date: new Date(newDate),
-            description: newDescription
+            // description: newDescription
         }
+        props.onNewExpense(expense);
         setNewTitle('');
         setNewAmount('');
-        setNewDescription('');
+        // setNewDescription('');
         setNewDate('');
-        props.onNewExpense(expense);
-        console.log(expense);
     }
     return(
         <form onSubmit={newExpense}>
@@ -81,13 +80,13 @@ const ExpenseForm = (props) => {
                     <label>Title</label>
                     <input type="text" value={newTitle} placeholder='Title' onChange={updateTitle}required/>
                 </div>
-                <div className="field">
+                {/* <div className="field">
                     <label>Description(optional)</label>
                     <input type="textbox" value={newDescription} placeholder='Description' onChange={updateDesp}/>
-                </div>
+                </div> */}
                 <div className="field">
                     <label>Amount</label>
-                    <input type="number" value={newAmount} min='0.01' step='0.01' placeholder='Amount' onChange={updateAmount} required/>
+                    <input type="number" value={newAmount} min='0.01' step='0.01' placeholder='00.00' onChange={updateAmount} required/>
                 </div>
 
                 <div className="field">
@@ -95,7 +94,10 @@ const ExpenseForm = (props) => {
                     <input type="date" value={newDate} min='2019-01-01' max='2022-12-31' onChange={updateDate} required/>
                 </div>
             </div>
-            <div className="submit"><button type="submit">Add Expense</button></div>
+            <div className="submit">
+                <button type="button" onClick={props.onCancel}>Cancel</button>
+                <button type="submit">Add Expense</button>
+            </div>
         </form>
     );
 }
